@@ -1,0 +1,28 @@
+defaults: &defaults
+  adapter: postgis
+  #adapter: postgresql
+  postgis_extension: postgis
+  #注意: pbboucer 不支持 schema_search_path, 需要数据库配置
+  schema_search_path: '"$user", public, postgis'
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+  allow_concurrency: false
+  host: localhost
+  port: 5435
+  username: yangkunlun
+  password: none
+
+development:
+  <<: *defaults
+  username: pgsql
+  password: pgsql
+  database: rmovie_development
+
+test:
+  <<: *defaults
+  database: rmovie_test
+
+production:
+  <<: *defaults
+  database: rmovie_production
