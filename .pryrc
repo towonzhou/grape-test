@@ -6,12 +6,5 @@ Pry.config.hooks.add_hook(:when_started, :say_hi) do
 end
 
 # Require Sinatra application
-require './app'
+require './boot'
 
-def reload!
-  AUTOLOAD_PATHS.each do |dir|
-    ::Dir.glob(::File.expand_path("../#{dir}", __FILE__) + '/**/*.rb').each do |file|
-      load file
-    end
-  end
-end

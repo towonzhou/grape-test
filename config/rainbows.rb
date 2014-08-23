@@ -7,6 +7,7 @@ end
 
 # paths and things
 wd          = File.expand_path('../../', __FILE__)
+p wd
 tmp_path    = File.join(wd, 'tmp','pids')
 log_path    = File.join(wd, 'log')
 

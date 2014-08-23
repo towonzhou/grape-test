@@ -9,4 +9,5 @@ logger = Logger.new("log/#{ENV["RACK_ENV"]}.log")
 use Rack::CommonLogger, logger
 
 # 运行Api
-run ::UsersApi
+#run ::AllApi
+run Rack::Cascade.new [AllApi::Api]

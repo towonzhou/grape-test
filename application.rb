@@ -9,8 +9,7 @@
 # set database connection
 require 'active_record'
 
-ActiveRecord::Base.establish_connection 
-YAML::load(File.open('config/database.yml'))[ENV["RACK_ENV"]]
+ActiveRecord::Base.establish_connection(YAML::load(File.open('config/database.yml'))[ENV["RACK_ENV"]])
 ActiveSupport.on_load(:active_record) do
   self.include_root_in_json = false
   self.default_timezone = :local
@@ -25,12 +24,15 @@ end
 end
 
 # initialize log
+require 'logger'
 Dir.mkdir('log') unless File.exist?('log')
+class ::Logger; alias_method :write, :<<; end
+log_file = "#{ENV["RACK_ENV"]}.log"
+
 case ENV["RACK_ENV"]
   when "production"
-    LogSupport.logger = "log/production.log"
+    $common_logger = ::Logger.new(log_file)
   else
-    LogSupport.logger = "log/development.log"
-    LogSupport.console = true
+    $common_logger = ::Logger.new("/dev/null")
 end
-ActiveRecord::Base.logger = LogSupport.logger
+ActiveRecord::Base.logger = $common_logger

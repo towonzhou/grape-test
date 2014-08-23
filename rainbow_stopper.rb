@@ -10,6 +10,7 @@
 require 'fileutils'
 
 current_path = File.dirname(File.dirname(File.expand_path(__FILE__)))
+current_path = File.dirname(File.expand_path(__FILE__))
 puts "current path: #{current_path}"
 
 rainbows_pid = File.join(current_path, 'tmp/pids/rainbows.pids')
