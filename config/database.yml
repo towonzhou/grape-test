@@ -9,14 +9,12 @@ defaults: &defaults
   timeout: 5000
   allow_concurrency: false
   host: localhost
-  port: 5435
+  port: 5432
   username: yangkunlun
   password: none
 
 development:
   <<: *defaults
-  username: pgsql
-  password: pgsql
   database: rmovie_development
 
 test:
